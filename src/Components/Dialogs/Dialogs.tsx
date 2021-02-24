@@ -14,7 +14,15 @@ const Dialogs = (props: DialogsPropsType) => {
         .map(d => <DialogItem name={d.name} id={d.id}/>)
     let messagesElements = props.dialogsPage.messages
         .map(m => <Message message={m.message} id={m.id}/>)
-
+    let newMessageElement = React.createRef<HTMLTextAreaElement>();
+    let addMessage = () => {
+        if (newMessageElement.current) {
+            let text = newMessageElement.current.value;
+            alert(newMessageElement.current.value)
+            //alert(newPostElement.current?.value) Вместо IF. Проверит по ?
+            // существует ли .current(не null)
+        }
+    }
     return (
         <div>
             <div className={s.dialogs}>
@@ -24,6 +32,8 @@ const Dialogs = (props: DialogsPropsType) => {
 
                 <div className={s.messages}>
                     {messagesElements}
+                    <textarea ref={newMessageElement}></textarea>
+                    <button onClick={addMessage}>Add Message</button>
                 </div>
             </div>
         </div>

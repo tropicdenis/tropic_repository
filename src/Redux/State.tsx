@@ -22,9 +22,15 @@ export type ProfilePageType = {
     posts: Array<PostType>
 }
 
+export type FriendType = {
+    name: string
+    avatarURL: string
+}
+
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
+    friends: Array<FriendType>
 }
 
 let state: StateType = {
@@ -52,7 +58,21 @@ let state: StateType = {
             {id: 5, name: "Viktor"},
             {id: 6, name: "Valera"},
         ]
-    }
+    },
+    friends: [
+        {name: "Garry", avatarURL: "https://nick-intl.mtvnimages.com/uri/mgid:file:gsp:kids-assets:/nick/properties/spongebob-squarepants/characters/gary-character-web-desktop.png?height=0&width=480&matte=true&crop=false"},
+        {name: "Patrick", avatarURL: "https://upload.wikimedia.org/wikipedia/ru/4/4e/Patrick_star-4854.jpg"},
+        {name: "Squidi", avatarURL: "https://www.meme-arsenal.com/memes/8ba9362a677fe74c4e7af0feaeef2360.jpg"}
+    ]
+}
+
+export let addPost = (postMessage: string): void => {
+    let newPost = {
+        id: 5,
+        message: postMessage,
+        likesCount: 0
+    };
+    state.profilePage.posts.push(newPost);
 
 }
 

@@ -1,8 +1,6 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 2fr 10fr;
-
-
+    grid-template-columns: 5fr 5fr;
 }
 
 .dialogsItems {
@@ -21,6 +19,19 @@
 .messages .message {
     color: white;
 
+}
+.dialogItemImage{
+    width: 50px;
+    border-radius: 20px;
+}
+.messageItem{
+    padding: 10px;
+    widtn:20px;
+    border-radius: 10px;
+    margin-right: 0;
+    text-align: right;
+    background-color: darkorange;
+    margin: 20px;
 }
 
 

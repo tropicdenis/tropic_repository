@@ -12,6 +12,10 @@ const DialogItem = (props: DialogItemType) => {
     return (
         <div className={s.dialog + ' ' + s.active}>
             <NavLink to={path}>{props.name}</NavLink>
+            <img className={s.dialogItemImage}
+                src={"https://m.buro247.ru/images/senina/SpongeBob_stock_art.jpg"}
+                alt={"Spounge Bob"}
+            />
         </div>
     )
 }
