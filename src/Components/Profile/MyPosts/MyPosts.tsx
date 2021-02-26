@@ -5,6 +5,7 @@ import {PostType} from "../../../Redux/State";
 
 type MyPostsPropsType = {
     posts: Array<PostType>
+    addPost: (text: string)=> void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -13,10 +14,10 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    let addPost = () => {
+    const addPost = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            alert(newPostElement.current.value)
+            props.addPost(text)
             //alert(newPostElement.current?.value) Вместо IF. Проверит по ?
             // существует ли .current(не null)
         }
@@ -30,10 +31,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                     <textarea ref={newPostElement}></textarea>
                 </div>
                 <div>
-                    <button
-                        onClick={addPost}
-                    >Add post
-                    </button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>

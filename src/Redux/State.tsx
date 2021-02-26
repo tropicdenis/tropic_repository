@@ -66,9 +66,9 @@ let state: StateType = {
     ]
 }
 
-export let addPost = (postMessage: string): void => {
-    let newPost = {
-        id: 5,
+export const addPost = (postMessage: string): void => {
+    const newPost: PostType = {
+        id: new Date().getTime(),
         message: postMessage,
         likesCount: 0
     };
