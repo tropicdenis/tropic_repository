@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../render";
+
 export type DialogType = {
     name: string,
     id: number
@@ -20,6 +22,7 @@ export type DialogsPageType = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
+    newPostText: string
 }
 
 export type FriendType = {
@@ -40,7 +43,8 @@ let state: StateType = {
             {id: 2, message: "It's my first post", likesCount: 11},
             {id: 3, message: "Blabla", likesCount: 5},
             {id: 4, message: "Dadada", likesCount: 14}
-        ]
+        ],
+        newPostText: ""
     },
     dialogsPage: {
         messages: [
@@ -60,20 +64,30 @@ let state: StateType = {
         ]
     },
     friends: [
-        {name: "Garry", avatarURL: "https://nick-intl.mtvnimages.com/uri/mgid:file:gsp:kids-assets:/nick/properties/spongebob-squarepants/characters/gary-character-web-desktop.png?height=0&width=480&matte=true&crop=false"},
+        {
+            name: "Garry",
+            avatarURL: "https://nick-intl.mtvnimages.com/uri/mgid:file:gsp:kids-assets:/nick/properties/spongebob-squarepants/characters/gary-character-web-desktop.png?height=0&width=480&matte=true&crop=false"
+        },
         {name: "Patrick", avatarURL: "https://upload.wikimedia.org/wikipedia/ru/4/4e/Patrick_star-4854.jpg"},
         {name: "Squidi", avatarURL: "https://www.meme-arsenal.com/memes/8ba9362a677fe74c4e7af0feaeef2360.jpg"}
     ]
 }
 
-export const addPost = (postMessage: string): void => {
+/*window.state = state;*/
+
+export const addPost = (): void => {
     const newPost: PostType = {
         id: new Date().getTime(),
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0
     };
     state.profilePage.posts.push(newPost);
-
+    state.profilePage.newPostText = ""
+    rerenderEntireTree(state);
+}
+export const updateNewPostText = (newPostText: string): void => {
+    state.profilePage.newPostText = (newPostText);
+    rerenderEntireTree(state);
 }
 
 export default state
