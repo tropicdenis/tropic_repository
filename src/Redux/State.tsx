@@ -1,5 +1,3 @@
-import {rerenderEntireTree} from "../render";
-
 export type DialogType = {
     name: string,
     id: number
@@ -34,6 +32,10 @@ export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     friends: Array<FriendType>
+}
+
+let rerenderEntireTree = (props?: any) => {
+    console.log("State changed");
 }
 
 let state: StateType = {
@@ -90,4 +92,11 @@ export const updateNewPostText = (newPostText: string): void => {
     rerenderEntireTree(state);
 }
 
+export const subscribe = (observer: any) => {
+    rerenderEntireTree = observer //набллюдатель
+}
+
 export default state
+
+//store - ООП
+
