@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import store, {RootStateType} from "./Redux/State";
+import store from "./Redux/State";
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
