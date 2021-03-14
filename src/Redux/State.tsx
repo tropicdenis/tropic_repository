@@ -34,8 +34,9 @@ export type RootStateType = {
     friends: Array<FriendType>
 }
 export type StoreType = {
+    getState: () => RootStateType
     _state: RootStateType
-    rerenderEntireTree: ()=> void
+    _callSubscriber: ()=> void
     addPost: ()=> void
     updateNewPostText: (newPostText: string) => void
     subscribe:(observer: ()=> void) => void
@@ -78,7 +79,10 @@ let store: StoreType = {
             {name: "Squidi", avatarURL: "https://www.meme-arsenal.com/memes/8ba9362a677fe74c4e7af0feaeef2360.jpg"}
         ]
     },
-    rerenderEntireTree() {
+    getState() {
+       return this._state;
+    },
+    _callSubscriber() {
         console.log("State changed");
     },
     addPost () {
@@ -89,19 +93,19 @@ let store: StoreType = {
         };
         this._state.profilePage.posts.push(newPost);
         this._state.profilePage.newPostText = ""
-        this.rerenderEntireTree();
+        this._callSubscriber();
     },
     updateNewPostText (newPostText) {
         this._state.profilePage.newPostText = (newPostText);
-        this.rerenderEntireTree();
+        this._callSubscriber();
     },
     subscribe (observer) {
-        this.rerenderEntireTree = observer //набллюдатель
+        this._callSubscriber = observer //набллюдатель
     }
 }
 
-/*window.state = state;*/
-export default store
 
+export default store
+/*window.state = state;*/
 //store - ООП
 
