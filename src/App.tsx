@@ -20,7 +20,7 @@ const App: React.FC<AppPropsType>=(props) => {
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
-                <Navbar/>
+                <Navbar state={state}/>
                 <div className='app-wrapper-content'>
                     <Route
                         path='/dialogs'
@@ -29,14 +29,11 @@ const App: React.FC<AppPropsType>=(props) => {
                         path='/profile'
                         render={() => <Profile
                             profilePage={state.profilePage}
-                            addPost={props.store.addPost.bind(props.store)}
-                            updateNewPostText={props.store.updateNewPostText.bind(props.store)}/>}/>
-
+                            dispatch={props.store.dispatch.bind(props.store)}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>
                 </div>
-
             </div>
         </BrowserRouter>
     );

@@ -1,9 +1,10 @@
 import React from "react";
 import s from './Friends.module.css'
-import {StateType} from "../../Redux/State";
+import {FriendType} from "../../Redux/State";
+
 
 type FriendsPropsType = {
-    friends: StateType
+    friends: FriendType[]
 }
 
 export const Friends = (props:FriendsPropsType) => {
@@ -12,18 +13,18 @@ export const Friends = (props:FriendsPropsType) => {
             <h2>Friends</h2>
             <div className={s.friendsItem}>
                 <img className={s.friendImage}
-                     src={props.friends.friends[0].avatarURL}/>
-                <p>{props.friends.friends[0].name}</p>
+                     src={props.friends[0].avatarURL}/>
+                <p>{props.friends[0].name}</p>
             </div >
             <div className={s.friendsItem}>
                 <img className={s.friendImage}
-                     src={props.friends.friends[1].avatarURL}/>
-                <p>{props.friends.friends[1].name}</p>
+                     src={props.friends[1].avatarURL}/>
+                <p>{props.friends[1].name}</p>
             </div>
             <div className={s.friendsItem}>
                 <img className={s.friendImage}
-                     src={props.friends.friends[2].avatarURL}/>
-                <p>{props.friends.friends[2].name}</p>
+                     src={props.friends[2].avatarURL}/>
+                <p>{props.friends[2].name}</p>
             </div>
         </div>
     )

@@ -5,17 +5,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
-let rerenderEntireTree = (state: RootStateType) => {
+let rerenderEntireTree = () => {
     ReactDOM.render(
         <div>
-            <App state={state}
-                 addPost={store.addPost}
-                 updateNewPostText={store.updateNewPostText}/>
+            <App store={store}
+            />
         </div>,
         document.getElementById('root')
     );
 }
-rerenderEntireTree(store.getState());
+rerenderEntireTree();
 
 store.subscribe(rerenderEntireTree);
 
