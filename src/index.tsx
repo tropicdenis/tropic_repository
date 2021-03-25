@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import store from "./Redux/State";
+import store from "./Redux/redux_store";
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';

@@ -1,4 +1,4 @@
-import {ActionsType, PostType, ProfilePageType} from "./State";
+import {ActionsType, PostType, ProfilePageType} from "./Store";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -24,6 +24,7 @@ const profileReducer = (state: ProfilePageType, action: ActionsType) => {
             return state
     }
 }
+
 export const addPostActionCreator = () => {
     return {
         type: "ADD-POST",

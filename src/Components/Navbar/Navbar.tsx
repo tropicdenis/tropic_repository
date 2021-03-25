@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Navbar.module.css';
 import {Friends} from "../Friends/Friends";
-import {RootStateType} from "../../Redux/State";
+import {RootStateType} from "../../Redux/Store";
 console.log(s);
 
 type NavbarPropsType = {

@@ -97,7 +97,7 @@ let store: StoreType = {
         this._callSubscriber = observer //набллюдатель
     },
 
-    dispatch(action: ActionsType) {  // {type: "ADD-POST"}
+    dispatch(action: ActionsType) {
 
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
