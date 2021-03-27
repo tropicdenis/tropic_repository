@@ -15,14 +15,12 @@ const MyPosts = (props: MyPostsPropsType) => {
     let postsElements = props.profilePage.posts.map(p => <Post message={p.message}
                                                                likesCount={p.likesCount}/>)
 
-    const addPost = () => {
-        //props.addPost(props.profilePage.newPostText);
-        props.dispatch(addPostActionCreator());
+    const onAddPost = () => {
+        props.addPost(props.profilePage.newPostText);
     }
 
     const newTextChangeHandler = (event:ChangeEvent<HTMLTextAreaElement>)=> {
-        //props.updateNewPostText(event.currentTarget.value)
-        props.dispatch(updateNewPostTextActionCreator(event.currentTarget.value));
+        props.updateNewPostText(event.currentTarget.value)
     }
 
     return (
@@ -35,7 +33,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                     </textarea>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>
