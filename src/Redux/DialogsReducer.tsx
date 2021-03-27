@@ -2,7 +2,9 @@ import {ActionsType, DialogsPageType} from "./Store";
 
 const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
 const SEND_MESSAGE = "SEND-MESSAGE";
-export type DialogsActionsType = ReturnType<typeof updateNewMessageBodyActionCreator> | ReturnType<typeof sendMessageActionCreator>
+export type DialogsActionsType =
+    ReturnType<typeof updateNewMessageBodyActionCreator>
+    | ReturnType<typeof sendMessageActionCreator>
 
 let initialState: DialogsPageType = {
     messages: [
@@ -24,15 +26,20 @@ let initialState: DialogsPageType = {
 }
 
 const dialogsReducer = (state = initialState, action: ActionsType) => {
+
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.body;
-            return state;
+            return  {
+                ...state,
+                newMessageBody: action.body
+            };
         case SEND_MESSAGE:
-            let body = state.newMessageBody;
-            state.newMessageBody = "";
-            state.messages.push({id: new Date().getTime(), message: body});
-            return state;
+            let body = state.newMessageBody
+            return {
+                ...state,
+                newMessageBody: "",
+                messages: [...state.messages, {id: new Date().getTime(), message: body}]
+            };
         default:
             return state;
     }
@@ -45,7 +52,7 @@ export const updateNewMessageBodyActionCreator = (body: string) => {
     } as const
 }
 
-export const sendMessageActionCreator = ()=> {
+export const sendMessageActionCreator = () => {
     return {
         type: "SEND-MESSAGE"
     } as const

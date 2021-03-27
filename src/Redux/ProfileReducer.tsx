@@ -7,14 +7,14 @@ export type ProfileActionsType =
     ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
 
 let initialState: ProfilePageType = {
-        posts: [
-            {id: 1, message: "Hi, how are you?", likesCount: 12},
-            {id: 2, message: "It's my first post", likesCount: 11},
-            {id: 3, message: "Blabla", likesCount: 5},
-            {id: 4, message: "Dadada", likesCount: 14}
-        ],
-        newPostText: ""
-    };
+    posts: [
+        {id: 1, message: "Hi, how are you?", likesCount: 12},
+        {id: 2, message: "It's my first post", likesCount: 11},
+        {id: 3, message: "Blabla", likesCount: 5},
+        {id: 4, message: "Dadada", likesCount: 14}
+    ],
+    newPostText: ""
+};
 
 const profileReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
@@ -24,15 +24,16 @@ const profileReducer = (state = initialState, action: ActionsType) => {
                 message: state.newPostText,
                 likesCount: 0
             };
-            let stateCopy = {...state};
-            stateCopy.posts = [...state.posts];
-            stateCopy.posts.push(newPost);
-            stateCopy.newPostText = ""
-            return stateCopy;
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: ""
+            };
         case UPDATE_NEW_POST_TEXT: {
-            let stateCopy = {...state}
-            stateCopy.newPostText = action.newPostText;
-            return stateCopy;
+            return {
+                ...state,
+                newPostText: action.newPostText
+            }
         }
         default :
             return state
