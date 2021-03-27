@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
-let rerenderEntireTree = () => {
+let rerenderEntireTree = (state: any) => {
     ReactDOM.render(
         <div>
             <App store={store}
@@ -14,8 +14,11 @@ let rerenderEntireTree = () => {
         document.getElementById('root')
     );
 }
-rerenderEntireTree();
+rerenderEntireTree(store.getState());
 
-store.subscribe(rerenderEntireTree);
+store.subscribe(()=> {
+    let state = store.getState()
+    rerenderEntireTree(state);
+});
 
 
