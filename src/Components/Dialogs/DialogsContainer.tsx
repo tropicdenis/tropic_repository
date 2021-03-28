@@ -8,12 +8,12 @@ type DialogsPropsType = {
     store: StoreType
 }
 
-let mapStateToProps = (state: any) => {
+let mapStateToProps = (state: ) => {
     return {
         dialogsPage: state.dialogsPage
     }
 }
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: ) => {
     return {
         updateNewMessageBody: (body: string) => {
             dispatch(updateNewMessageBodyActionCreator(body))

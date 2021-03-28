@@ -9,12 +9,14 @@ import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
 import {StoreType} from "./Redux/Store";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
+import Users from "./Components/Users/Users";
+import UsersContainer from "./Components/Users/UsersContainer";
 
 type AppPropsType = {
     store: StoreType
 }
 
-const App: React.FC<AppPropsType>=(props) => {
+const App: React.FC<AppPropsType> = (props) => {
     const state = props.store.getState();
     return (
         <BrowserRouter>
@@ -24,10 +26,13 @@ const App: React.FC<AppPropsType>=(props) => {
                 <div className='app-wrapper-content'>
                     <Route
                         path='/dialogs'
-                        render={() => <DialogsContainer store={props.store} />}/>
+                        render={() => <DialogsContainer store={props.store}/>}/>
                     <Route
                         path='/profile'
-                        render={() => <Profile store={props.store} />}/>
+                        render={() => <Profile store={props.store}/>}/>
+                    <Route
+                        path='/users'
+                        render={() => <UsersContainer/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>

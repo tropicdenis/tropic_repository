@@ -8,13 +8,13 @@ type MyPostsPropsType = {
     store: StoreType
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ) => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText
     }
 }
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: ) => {
     return {
         updateNewPostText: (text: string) => {
             let action = updateNewPostTextActionCreator(text)
