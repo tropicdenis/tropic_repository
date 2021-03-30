@@ -3,10 +3,16 @@ import DialogItem from "./DialogItem/DialogItem";
 import s from './Dialogs.module.css';
 import Message from "./Message/Message";
 import {StoreType} from "../../Redux/Store";
-import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "../../Redux/DialogsReducer";
+import {
+    InitialDialogsType,
+    sendMessageActionCreator,
+    updateNewMessageBodyActionCreator
+} from "../../Redux/DialogsReducer";
 
 type DialogsPropsType = {
-    store: StoreType
+    dialogsPage: InitialDialogsType
+    updateNewMessageBody: (body: string) => void
+    sendMessage: () => void
 }
 const Dialogs = (props: DialogsPropsType) => {
 

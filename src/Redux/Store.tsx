@@ -1,12 +1,13 @@
 import profileReducer, {ProfileActionsType} from "./ProfileReducer";
 import dialogsReducer, {DialogsActionsType} from "./DialogsReducer";
 import friendsReducer from "./FriendsReducer";
+import {UsersActionsType} from "./UsersReducer";
 
-export type DialogType = {
+type DialogType = {
     name: string,
     id: number
 }
-export type MessageType = {
+type MessageType = {
     id: number
     message: string
 }
@@ -46,7 +47,7 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-export type ActionsType = ProfileActionsType | DialogsActionsType
+export type ActionsType = ProfileActionsType | DialogsActionsType | UsersActionsType
 
 let store: StoreType = {
     _state: {

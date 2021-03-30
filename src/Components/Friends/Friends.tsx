@@ -1,13 +1,15 @@
 import React from "react";
 import s from './Friends.module.css'
 import {FriendType} from "../../Redux/Store";
+import {connect} from "react-redux";
+import {AppStateType} from "../../Redux/redux_store";
 
 
-type FriendsPropsType = {
+type MapStateToPropsType = {
     friends: FriendType[]
 }
 
-export const Friends = (props:FriendsPropsType) => {
+export const Friends = (props: MapStateToPropsType) => {
     return (
         <div>
             <h2>Friends</h2>
@@ -29,3 +31,11 @@ export const Friends = (props:FriendsPropsType) => {
         </div>
     )
 }
+
+let mapStateToProps = (state: AppStateType ): MapStateToPropsType => {
+    return {
+        friends: state.friends
+    }
+}
+
+export default connect(mapStateToProps, {})(Friends)

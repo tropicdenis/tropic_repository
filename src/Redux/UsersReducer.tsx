@@ -1,62 +1,74 @@
-import {ActionsType, PostType, ProfilePageType} from "./Store";
+import {ActionsType} from "./Store";
 
-const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SET_USERS";
+export type UserType = {
+    id: number
+    photoURL: string
+    followed: boolean
+    fullName: string
+    status: string
+}
 
-export type ProfileActionsType =
-    ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
+export type InitialStateType = {
+    users: Array<UserType>
+}
 
-let initialState: UsersPageType = {
+let initialState: InitialStateType = {
     users: []
 };
 
-const usersReducer = (state = initialState, action: ActionsType) => {
+export type UsersActionsType =
+    ReturnType<typeof followAC>
+    | ReturnType<typeof unfollowAC>
+    | ReturnType<typeof setUsersAC>
+
+const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case FOLLOW:
-            let stateCopy = {
+        case "FOLLOW":
+            return {
                 ...state,
-                //users: [...state.users]
                 users: state.users.map(u => {
-                    if(u.id === action.userId) {
+                    if (u.id === action.userId) {
                         return {...u, followed: true}
                     }
                     return u;
                 })
-            }
-        case UNFOLLOW:
-            let stateCopy = {
+            };
+        case "UNFOLLOW":
+            return {
                 ...state,
-                //users: [...state.users]
                 users: state.users.map(u => {
-                    if(u.id === action.userId) {
+                    if (u.id === action.userId) {
                         return {...u, followed: false}
                     }
                     return u;
                 })
             }
-        case SET_USERS:{
-            return {...state, users: [...state.users, ...action.users]}
+        case "SET_USERS":
+            return {
+                ...state,
+                users: [...state.users, ...action.users]
+            }
+            default:
+                return state;
         }
-    }
 }
 
-export const followAC = (userId) => {
+export const followAC = (userId: number) => {
     return {
-        type: FOLLOW,
+        type: "FOLLOW",
         userId
     } as const
 }
 
-export const unfollowAC = (userId) => {
+export const unfollowAC = (userId: number) => {
     return {
-        type: UNFOLLOW,
+        type: "UNFOLLOW",
         userId
     } as const
 }
-export const setUsersAC = (users) => {
+export const setUsersAC = (users: Array<UserType>) => {
     return {
-        type: SET_USERS,
+        type: "SET_USERS",
         users
     } as const
 }

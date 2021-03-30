@@ -1,20 +1,33 @@
-import React, {ChangeEvent} from "react";
-import {ActionsType, ProfilePageType, StoreType} from "../../../Redux/Store";
+import React from "react";
+import {PostType, StoreType} from "../../../Redux/Store";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/ProfileReducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
+import {AppStateType} from "../../../Redux/redux_store";
+import {Dispatch} from "redux";
 
 type MyPostsPropsType = {
     store: StoreType
 }
 
-const mapStateToProps = (state: ) => {
+type MapStateToPropsType = {
+    posts: Array<PostType>
+    newPostText: string
+}
+
+const mapStateToProps = (state: AppStateType):MapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText
     }
 }
-const mapDispatchToProps = (dispatch: ) => {
+
+type MapDispatchToPropsType = {
+    updateNewPostText: (text: string) => void
+    addPost: () => void
+}
+
+const mapDispatchToProps = (dispatch: Dispatch ):MapDispatchToPropsType => {
     return {
         updateNewPostText: (text: string) => {
             let action = updateNewPostTextActionCreator(text)

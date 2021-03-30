@@ -1,22 +1,24 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css';
 import Post from "../Post/Post";
-import {ActionsType, ProfilePageType} from "../../../Redux/Store";
+import {ActionsType, PostType, ProfilePageType} from "../../../Redux/Store";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/ProfileReducer";
 
 type MyPostsPropsType = {
-    profilePage: ProfilePageType
-    dispatch: (action:ActionsType) => void
+    posts: Array<PostType>
+    newPostText: string
+    updateNewPostText: (text: string) => void
+    addPost: () => void
 }
 
 
 const MyPosts = (props: MyPostsPropsType) => {
 
-    let postsElements = props.profilePage.posts.map(p => <Post message={p.message}
+    let postsElements = props.posts.map(p => <Post message={p.message}
                                                                likesCount={p.likesCount}/>)
 
     const onAddPost = () => {
-        props.addPost(props.profilePage.newPostText);
+        props.addPost();
     }
 
     const newTextChangeHandler = (event:ChangeEvent<HTMLTextAreaElement>)=> {
@@ -29,7 +31,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             <div>
                 <div>
                     <textarea onChange={newTextChangeHandler}
-                              value={props.profilePage.newPostText}>
+                              value={props.newPostText}>
                     </textarea>
                 </div>
                 <div>

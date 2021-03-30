@@ -4,13 +4,13 @@ import dialogsReducer from "./DialogsReducer";
 import friendsReducer from "./FriendsReducer";
 import usersReducer from "./UsersReducer";
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     friends: friendsReducer,
     usersPage: usersReducer
 });
 
-let store = createStore(reducers);
 
-export default store
+export type AppStateType = ReturnType<typeof rootReducer>
+export const store = createStore(rootReducer);
