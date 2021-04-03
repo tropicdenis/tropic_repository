@@ -29,7 +29,6 @@ export const Users = (props: UsersPropsType) => {
                 props.follow(u.id)
             }}>Follow</button>
         }
-                <button>Follow</button>
             </div>
             </span>
             <span>

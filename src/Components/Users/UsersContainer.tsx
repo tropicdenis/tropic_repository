@@ -16,11 +16,13 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         usersPage: state.usersPage
     }
 };
+
 type MapDispatchToPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setUsers: (users: Array<UserType>) => void
 }
+
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         follow: (userId: number) => {
