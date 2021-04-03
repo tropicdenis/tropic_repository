@@ -1,8 +1,11 @@
 import {ActionsType} from "./Store";
-
+type PhotosType = {
+    small: string
+    large: string
+}
 export type UserType = {
     id: number
-    photoURL: string
+    photos: PhotosType
     followed: boolean
     fullName: string
     status: string
@@ -13,7 +16,7 @@ export type InitialStateType = {
 }
 
 let initialState: InitialStateType = {
-    users: []
+    users: [] as Array<UserType>
 };
 
 export type UsersActionsType =
