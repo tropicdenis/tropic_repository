@@ -1,4 +1,5 @@
 import {ActionsType} from "./Store";
+
 type PhotosType = {
     small: string
     large: string
@@ -13,20 +14,35 @@ export type UserType = {
 
 export type InitialStateType = {
     users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
+const FOLLOW = 'FOLLOW';
+const UNFOLLOW = 'UNFOLLOW';
+const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+
 let initialState: InitialStateType = {
-    users: [] as Array<UserType>
+    users: [] as Array<UserType>,
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 };
 
 export type UsersActionsType =
     ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setTotalUsersCountAC>
+
 
 const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case "FOLLOW":
+        case FOLLOW:
             return {
                 ...state,
                 users: state.users.map(u => {
@@ -36,7 +52,7 @@ const usersReducer = (state = initialState, action: ActionsType): InitialStateTy
                     return u;
                 })
             };
-        case "UNFOLLOW":
+        case UNFOLLOW:
             return {
                 ...state,
                 users: state.users.map(u => {
@@ -46,33 +62,54 @@ const usersReducer = (state = initialState, action: ActionsType): InitialStateTy
                     return u;
                 })
             }
-        case "SET_USERS":
+        case SET_USERS:
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: [...action.users]
             }
-            default:
-                return state;
-        }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        case SET_TOTAL_USERS_COUNT:
+            return {
+                ...state,
+                totalUsersCount: action.count
+            }
+        default:
+            return state;
+    }
 }
 
 export const followAC = (userId: number) => {
     return {
-        type: "FOLLOW",
+        type: FOLLOW,
         userId
     } as const
 }
-
 export const unfollowAC = (userId: number) => {
     return {
-        type: "UNFOLLOW",
+        type: UNFOLLOW,
         userId
     } as const
 }
 export const setUsersAC = (users: Array<UserType>) => {
     return {
-        type: "SET_USERS",
+        type: SET_USERS,
         users
+    } as const
+}
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        currentPage: currentPage
+    } as const
+}
+export const setTotalUsersCountAC = (totalUsersCount: number) => {
+    return {
+        type: SET_TOTAL_USERS_COUNT,
+        count: totalUsersCount
     } as const
 }
 
