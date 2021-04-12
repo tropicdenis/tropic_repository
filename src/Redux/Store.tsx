@@ -27,6 +27,7 @@ export type DialogsPageType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
+    profile: {}
 }
 
 export type FriendType = {

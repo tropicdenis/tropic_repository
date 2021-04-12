@@ -5,15 +5,16 @@ import {
     InitialStateType,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers, toggleIsFetching,
+    setUsers,
+    toggleIsFetching,
     unfollow,
     UserType
 } from "../../Redux/UsersReducer";
 import {AppStateType} from "../../Redux/redux_store";
-import {Dispatch} from "redux";
 import axios from "axios";
 import Users from "./Users";
-import preloader from './../../../src/assets/images/__Iphone-spinner-1.gif';
+import Preloader from "../common/Preloader/Preloader";
+
 
 type MapStateToPropsType = {
     usersPage: InitialStateType
@@ -49,7 +50,7 @@ class UsersContainer extends React.Component {
     render() {
 
         return <>
-            {this.props.isFetching ? <Preloader /> : null}
+            {this.props.isFetching ? <Preloader/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage}
@@ -115,11 +116,11 @@ type MapDispatchToPropsType =
 //     }
 // }
 
-export default connect(mapStateToProps,  {
+export default connect(mapStateToProps, {
+    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(UsersContainer)
     // follow: follow,
     // unfollow: unfollow,
     // setUsers: setUsers,
     // setCurrentPage: setCurrentPage,
     // setTotalUsersCount: setTotalUsersCount,
     // toggleIsFetching: toggleIsFetching
-    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(UsersContainer)
