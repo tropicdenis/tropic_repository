@@ -24,7 +24,7 @@ const App: React.FC<AppPropsType> = (props) => {
                         path='/dialogs'
                         render={() => <DialogsContainer/>}/>
                     <Route
-                        path='/profile'
+                        path='/profile/:userId?'
                         render={() => <ProfileContainer/>}/>
                     <Route
                         path='/users'
