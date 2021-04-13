@@ -9,6 +9,7 @@ export type UserType = {
     photos: PhotosType
     followed: boolean
     fullName: string
+    name: string
     status: string
 }
 

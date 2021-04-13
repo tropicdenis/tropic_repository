@@ -1,11 +1,12 @@
 import React from "react";
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
+import {ProfileType} from "../../../Redux/Store";
+type PropsType = {
+    profile: ProfileType
+}
+const ProfileInfo = (props: PropsType) => {
 
-const ProfileInfo = (props) => {
-    if (!props.profile ) {
-        return <Preloader />
-    }
     return (
         <div>
             <div>

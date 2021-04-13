@@ -1,4 +1,4 @@
-import {ActionsType, PostType, ProfilePageType} from "./Store";
+import {ActionsType, PostType, ProfilePageType, ProfileType} from "./Store";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -54,7 +54,7 @@ export const addPostActionCreator = () => {
         type: ADD_POST,
     } as const
 }
-export const setUserProfile = (profile) => {
+export const setUserProfile = (profile: ProfileType) => {
     return {
         type: SET_USER_PROFILE,
         profile

@@ -17,7 +17,7 @@ import Preloader from "../common/Preloader/Preloader";
 
 
 type MapStateToPropsType = {
-    usersPage: InitialStateType
+    users: Array<UserType>
     pageSize: number
     totalUsersCount: number
     currentPage: number
@@ -26,7 +26,7 @@ type MapStateToPropsType = {
 
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-class UsersContainer extends React.Component {
+class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
         this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
@@ -50,7 +50,7 @@ class UsersContainer extends React.Component {
     render() {
 
         return <>
-            {this.props.isFetching ? <Preloader/> : null}
+            {this.props.isFetching ? <Preloader /> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage}
@@ -65,7 +65,7 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         return {
-            usersPage: state.usersPage,
+            users: state.usersPage.users,
             pageSize: state.usersPage.pageSize,
             totalUsersCount: state.usersPage.totalUsersCount,
             currentPage: state.usersPage.currentPage,
@@ -78,18 +78,10 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 type MapDispatchToPropsType =
     {
         follow: (userId: number) => void
-        unfollow
-            :
-            (userId: number) => void
-        setUsers
-            :
-            (users: Array<UserType>) => void
-        setCurrentPage
-            :
-            (pageNumber: number) => void
-        setTotalUsersCount
-            :
-            (totalCount: number) => void
+        unfollow:(userId: number) => void
+        setUsers:(users: Array<UserType>) => void
+        setCurrentPage:(pageNumber: number) => void
+        setTotalUsersCount:(totalCount: number) => void
         toggleIsFetching: (isFetching: boolean) => void
     }
 

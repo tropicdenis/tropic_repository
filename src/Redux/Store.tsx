@@ -24,10 +24,34 @@ export type DialogsPageType = {
     dialogs: Array<DialogType>
 }
 
+export type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website:string
+    youtube: string
+    mainLink: string
+}
+
+export type PhotosType = {
+    small: string
+    large:string
+}
+export type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts:ContactsType
+    photos: PhotosType
+}
+
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
-    profile: {}
+    profile:ProfileType | null
 }
 
 export type FriendType = {
@@ -59,7 +83,8 @@ let store: StoreType = {
                 {id: 3, message: "Blabla", likesCount: 5},
                 {id: 4, message: "Dadada", likesCount: 14}
             ],
-            newPostText: ""
+            newPostText: "",
+            profile: null
         },
         dialogsPage: {
             messages: [
