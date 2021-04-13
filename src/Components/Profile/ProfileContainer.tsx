@@ -38,6 +38,7 @@ class ProfileContainer extends React.Component<PropsType>{
         return (
 
             <div>
+                Hello
                 {!this.props.profile ? <Preloader /> : <Profile {...this.props} profile={this.props.profile}/>}
             </div>
         );
