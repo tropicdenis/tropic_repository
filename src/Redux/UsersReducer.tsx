@@ -19,6 +19,7 @@ export type InitialStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    folowingInProgress: boolean
 }
 
 const FOLLOW = 'FOLLOW';
@@ -26,14 +27,16 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 let initialState: InitialStateType = {
     users: [] as Array<UserType>,
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    folowingInProgress: false
 };
 
 export type UsersActionsType =
@@ -43,6 +46,7 @@ export type UsersActionsType =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof toggleIsFollowingProgress>
 
 const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
@@ -81,10 +85,15 @@ const usersReducer = (state = initialState, action: ActionsType): InitialStateTy
                 ...state,
                 totalUsersCount: action.count
             }
-            case TOGGLE_IS_FETCHING:
+        case TOGGLE_IS_FETCHING:
             return {
                 ...state,
                 isFetching: action.isFetching
+            }
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
+            return {
+                ...state,
+                folowingInProgress: action.isFetching
             }
         default:
             return state;
@@ -124,6 +133,12 @@ export const setTotalUsersCount = (totalUsersCount: number) => {
 export const toggleIsFetching = (isFetching: boolean) => {
     return {
         type: TOGGLE_IS_FETCHING,
+        isFetching
+    } as const
+}
+export const toggleIsFollowingProgress = (isFetching: boolean) => {
+    return {
+        type: TOGGLE_IS_FOLLOWING_PROGRESS,
         isFetching
     } as const
 }

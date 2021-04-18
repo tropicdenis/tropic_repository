@@ -14,6 +14,8 @@ type PropsType = {
     users: Array<UserType>
     unfollow: (userId: number) => void
     follow: (userId: number) => void
+    toggleIsFollowingProgress: (toggle: boolean) => void
+    folowingInProgress: boolean
 }
 let Users = (props: PropsType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -43,36 +45,41 @@ let Users = (props: PropsType) => {
                 </div>
              <div>
                 {u.followed
-                    ? <button onClick={() => {
+                    ? <button disabled={props.folowingInProgress} onClick={() => {
+                        props.toggleIsFollowingProgress(true)
                         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
                             {
                                 withCredentials: true,
                                 headers: {
-                                    "API-KEY" : "5ce17daa-8642-4a76-b5a3-3d919299f84b"
+                                    "API-KEY": "5ce17daa-8642-4a76-b5a3-3d919299f84b"
                                 }
                             })
                             .then(response => {
                                 if (response.data.resultCode == 0) {
                                     props.unfollow(u.id)
                                 }
+                                props.toggleIsFollowingProgress(false)
                             });
                     }}>Unfollow</button>
-                        : <button onClick={() => {
+                    : <button disabled={props.folowingInProgress} onClick={() => {
+                        props.toggleIsFollowingProgress(true)
                         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},
-                    {withCredentials: true,
-                        headers: {
-                            "API-KEY" : "5ce17daa-8642-4a76-b5a3-3d919299f84b"
-                        }
-                    })
-                        .then(response => {
-                        if (response.data.resultCode == 0) {
-                        props.follow(u.id)
-                    }
-                    });
+                            {
+                                withCredentials: true,
+                                headers: {
+                                    "API-KEY": "5ce17daa-8642-4a76-b5a3-3d919299f84b"
+                                }
+                            })
+                            .then(response => {
+                                if (response.data.resultCode == 0) {
+                                    props.follow(u.id)
+                                }
+                                props.toggleIsFollowingProgress(false)
+                            });
 
 
                     }}>Follow</button>
-                    }
+                }
                     </div>
                     </span>
                     <span>
@@ -85,10 +92,10 @@ let Users = (props: PropsType) => {
                     <div>{"u.location.city"}</div>
                     </span>
                     </span>
-                    </div>)
-                    }
-                    </div>
-                    )
-                }
+                </div>)
+            }
+        </div>
+    )
+}
 
-                 export default Users
+export default Users
