@@ -14,8 +14,8 @@ type PropsType = {
     users: Array<UserType>
     unfollow: (userId: number) => void
     follow: (userId: number) => void
-    toggleIsFollowingProgress: (toggle: boolean) => void
-    folowingInProgress: boolean
+    toggleIsFollowingProgress: (toggle: boolean, userId: number) => void
+    folowingInProgress: Array<number>
 }
 let Users = (props: PropsType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -45,8 +45,8 @@ let Users = (props: PropsType) => {
                 </div>
              <div>
                 {u.followed
-                    ? <button disabled={props.folowingInProgress} onClick={() => {
-                        props.toggleIsFollowingProgress(true)
+                    ? <button disabled={props.folowingInProgress.some(id => id === u.id)} onClick={() => {
+                        props.toggleIsFollowingProgress(true, u.id)
                         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
                             {
                                 withCredentials: true,
@@ -58,11 +58,11 @@ let Users = (props: PropsType) => {
                                 if (response.data.resultCode == 0) {
                                     props.unfollow(u.id)
                                 }
-                                props.toggleIsFollowingProgress(false)
+                                props.toggleIsFollowingProgress(false, u.id)
                             });
                     }}>Unfollow</button>
-                    : <button disabled={props.folowingInProgress} onClick={() => {
-                        props.toggleIsFollowingProgress(true)
+                    : <button disabled={props.folowingInProgress.some(id => id === u.id)} onClick={() => {
+                        props.toggleIsFollowingProgress(true, u.id)
                         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},
                             {
                                 withCredentials: true,
@@ -74,7 +74,7 @@ let Users = (props: PropsType) => {
                                 if (response.data.resultCode == 0) {
                                     props.follow(u.id)
                                 }
-                                props.toggleIsFollowingProgress(false)
+                                props.toggleIsFollowingProgress(false, u.id)
                             });
 
 
