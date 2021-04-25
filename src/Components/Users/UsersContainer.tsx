@@ -68,6 +68,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 ;
 
+
 type MapDispatchToPropsType =
     {
         follow: (userId: number) => void
