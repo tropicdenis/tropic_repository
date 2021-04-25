@@ -47,7 +47,6 @@ class UsersContainer extends React.Component<UsersPropsType> {
                    users={this.props.users}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
-                   toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
                    folowingInProgress={this.props.folowingInProgress}
             />
         </>
@@ -78,7 +77,7 @@ type MapDispatchToPropsType =
         setTotalUsersCount: (totalCount: number) => void
         toggleIsFetching: (isFetching: boolean) => void
         toggleIsFollowingProgress: (isFetching: boolean, userId: number) => void
-        getUsersThunkCreator: (currentPage: number, pageSize: number) => void
+        getUsers: (currentPage: number, pageSize: number) => void
     }
 
 export default connect(mapStateToProps, {
