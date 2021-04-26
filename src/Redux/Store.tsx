@@ -72,7 +72,7 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-export type ActionsType = ProfileActionsType | DialogsActionsType | UsersActionsType
+export type ActionsType = any
 
 let store: StoreType = {
     _state: {

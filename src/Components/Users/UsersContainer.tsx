@@ -72,14 +72,14 @@ type MapDispatchToPropsType =
     {
         follow: (userId: number) => void
         unfollow: (userId: number) => void
-        setUsers: (users: Array<UserType>) => void
+        // setUsers: (users: Array<UserType>) => void
         setCurrentPage: (pageNumber: number) => void
-        setTotalUsersCount: (totalCount: number) => void
-        toggleIsFetching: (isFetching: boolean) => void
+        // setTotalUsersCount: (totalCount: number) => void
+        // toggleIsFetching: (isFetching: boolean) => void
         toggleIsFollowingProgress: (isFetching: boolean, userId: number) => void
         getUsers: (currentPage: number, pageSize: number) => void
     }
 
-export default connect(mapStateToProps, {
-    follow, unfollow, setCurrentPage, toggleIsFollowingProgress, getUsers: getUsers})(UsersContainer)
+export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {
+    follow, unfollow, setCurrentPage, toggleIsFollowingProgress, getUsers})(UsersContainer)
 

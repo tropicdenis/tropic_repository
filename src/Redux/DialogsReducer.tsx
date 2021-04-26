@@ -1,4 +1,3 @@
-import {ActionsType} from "./Store";
 
 const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
 const SEND_MESSAGE = "SEND-MESSAGE";
@@ -70,5 +69,8 @@ export const sendMessageActionCreator = () => {
     } as const
 }
 
+type ActionsType =
+    | ReturnType<typeof  updateNewMessageBodyActionCreator>
+    | ReturnType<typeof  sendMessageActionCreator>
 
 export default dialogsReducer

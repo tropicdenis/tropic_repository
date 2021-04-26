@@ -1,6 +1,6 @@
 import React from "react";
 
-const Login = (props) => {
+const Login = (props: any) => {
     return (
         <h1>Login</h1>
     )

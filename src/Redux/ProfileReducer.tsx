@@ -1,4 +1,4 @@
-import {ActionsType, PostType, ProfilePageType, ProfileType} from "./Store";
+import {PostType, ProfilePageType, ProfileType} from "./Store";
 import {Dispatch} from "redux";
 import {usersAPI} from "../api/api";
 
@@ -75,5 +75,8 @@ export const updateNewPostTextActionCreator = (newPostText: string) => {
         newPostText: newPostText
     } as const
 }
-
+type ActionsType =
+    | ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof updateNewPostTextActionCreator>
 export default profileReducer
