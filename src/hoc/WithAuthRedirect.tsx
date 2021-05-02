@@ -17,10 +17,11 @@ export function withAuthRedirect <T>(Component: ComponentType<T>) {
 
     const RedirectComponent = (props: MapStatePropsForRedirectType) => {
         let {isAuth, ...restProps} = props
-
+console.log(isAuth)
         if (!isAuth) return <Redirect to={"/login"}/>
         return <Component {...restProps as T}/>
-
     }
-    return RedirectComponent
+    const ConnectRedirectComponent = connect (mapStateToPropsForRedirect)(RedirectComponent)
+    return ConnectRedirectComponent
 }
+
