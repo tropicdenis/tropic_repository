@@ -1,23 +1,41 @@
 import {ProfileType} from "../../../Redux/Store";
-import s from "./ProfileInfo.module.css";
 import React from "react";
 
 
 type PropsType = {
     profile: ProfileType
 }
-const ProfileStatus = (props: PropsType) => {
 
-    return (
-        <div>
+class ProfileStatus extends React.Component {
+    state = {
+        editMode: false
+    }
+    activateEditMode () {
+        this.setState({
+            editMode: true
+        });
+    }
+    deactivateEditMode () {
+        this.setState({
+            editMode: false
+        });
+    }
+    render() {
+        return (
             <div>
-                <span>props.status</span>
+                {!this.state.editMode &&
+                    <div>
+                        <span onDoubleClick={this.activateEditMode.bind(this)}>{this.props.status}</span>
+                    </div>
+                }
+                {this.state.editMode &&
+                    <div>
+                        <input autoFocus={true} onBlur={this.deactivateEditMode} value={this.props.status}/>
+                    </div>
+                }
             </div>
-            <div>
-                <input value={props.status}/>
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default ProfileStatus
