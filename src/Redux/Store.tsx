@@ -52,6 +52,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     profile:ProfileType | null
+    status: string
 }
 
 export type FriendType = {
@@ -84,7 +85,8 @@ let store: StoreType = {
                 {id: 4, message: "Dadada", likesCount: 14}
             ],
             newPostText: "",
-            profile: null
+            profile: null,
+            status: ''
         },
         dialogsPage: {
             messages: [

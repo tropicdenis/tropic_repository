@@ -2,7 +2,7 @@ import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {getUserProfile} from "../../Redux/ProfileReducer";
+import {getUserProfile, getUserStatus, updateUserStatus} from "../../Redux/ProfileReducer";
 import {ProfileType} from "../../Redux/Store";
 import Preloader from "../common/Preloader/Preloader";
 import {AppStateType} from "../../Redux/redux_store";
@@ -15,10 +15,13 @@ type PathParamsType = {
 
 type MapStatePropsType = {
     profile: ProfileType | null
+    status: string
 };
 
 type MapDispatchToPropsType = {
     getUserProfile: (profile: any) => void
+    getUserStatus: (userId: number) => void
+    updateUserStatus: () => void
 };
 
 type OwnPropsType = MapStatePropsType & MapDispatchToPropsType;
@@ -30,7 +33,8 @@ class ProfileContainer extends React.Component<PropsType> {
         if (!userId) {
             userId = 2;
         }
-        this.props.getUserProfile(userId)
+        this.props.getUserProfile(userId);
+        this.props.getUserStatus(userId);
     }
 
     render() {
@@ -38,7 +42,11 @@ class ProfileContainer extends React.Component<PropsType> {
         return (
             <div>
                 Hello
-                {!this.props.profile ? <Preloader/> : <Profile {...this.props} profile={this.props.profile}/>}
+                {!this.props.profile
+                    ? <Preloader/>
+                    : <Profile {...this.props} profile={this.props.profile}
+                status={this.props.status} updateStatus={this.props.updateUserStatus}
+                />}
             </div>
         );
     }
@@ -46,13 +54,14 @@ class ProfileContainer extends React.Component<PropsType> {
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        status: state.profilePage.status
     }
 
 };
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile}),
+    connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus}),
     withRouter,
     withAuthRedirect
 ) (ProfileContainer)
