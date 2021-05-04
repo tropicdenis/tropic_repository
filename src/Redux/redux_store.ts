@@ -5,13 +5,16 @@ import friendsReducer from "./FriendsReducer";
 import usersReducer from "./UsersReducer";
 import authReducer from "./auth_reducer";
 import thunkMiddleware from "redux-thunk";
+import {reducer as formReducer} from "redux-form";
+
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     friends: friendsReducer,
     usersPage: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 });
 
 
