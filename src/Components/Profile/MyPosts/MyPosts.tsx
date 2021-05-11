@@ -1,8 +1,8 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from './MyPosts.module.css';
 import Post from "../Post/Post";
-import {ActionsType, PostType, ProfilePageType} from "../../../Redux/Store";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/ProfileReducer";
+import {PostType} from "../../../Redux/Store";
+import {Field, reduxForm} from "redux-form";
 
 type MyPostsPropsType = {
     posts: Array<PostType>
@@ -17,32 +17,34 @@ const MyPosts = (props: MyPostsPropsType) => {
     let postsElements = props.posts.map(p => <Post message={p.message}
                                                                likesCount={p.likesCount}/>)
 
-    const onAddPost = () => {
-        props.addPost();
-    }
-
-    const newTextChangeHandler = (event:ChangeEvent<HTMLTextAreaElement>)=> {
-        props.updateNewPostText(event.currentTarget.value)
+    let onAddPost = (values: ) => {
+        props.addPost(values.newPostText);
     }
 
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
-            <div>
-                <div>
-                    <textarea onChange={newTextChangeHandler}
-                              value={props.newPostText}>
-                    </textarea>
-                </div>
-                <div>
-                    <button onClick={onAddPost}>Add post</button>
-                </div>
-            </div>
+            <AddNewPostFormRedux onSubmit={onAddPost}/>
             <div className={s.posts}>
                 {postsElements}
             </div>
         </div>
     );
 }
+
+let AddNewPostForm = (props:) => {
+    return(
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field name="newPostText" component="textarea"/>
+            </div>
+            <div>
+                <button>Add post</button>
+            </div>
+        </form>
+    )
+}
+
+let AddNewPostFormRedux = reduxForm({form: "ProfileAddNewPostForm"})(AddNewPostForm)
 
 export default MyPosts

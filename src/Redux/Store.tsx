@@ -1,7 +1,6 @@
-import profileReducer, {ProfileActionsType} from "./ProfileReducer";
-import dialogsReducer, {DialogsActionsType} from "./DialogsReducer";
+import profileReducer from "./ProfileReducer";
+import dialogsReducer from "./DialogsReducer";
 import friendsReducer from "./FriendsReducer";
-import {UsersActionsType} from "./UsersReducer";
 
 type DialogType = {
     name: string,
@@ -20,7 +19,6 @@ export type PostType = {
 
 export type DialogsPageType = {
     messages: Array<MessageType>
-    newMessageBody: string
     dialogs: Array<DialogType>
 }
 
@@ -50,7 +48,6 @@ export type ProfileType = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string
     profile:ProfileType | null
     status: string
 }
@@ -84,7 +81,6 @@ let store: StoreType = {
                 {id: 3, message: "Blabla", likesCount: 5},
                 {id: 4, message: "Dadada", likesCount: 14}
             ],
-            newPostText: "",
             profile: null,
             status: ''
         },
@@ -96,7 +92,6 @@ let store: StoreType = {
                 {id: 4, message: "Yo"},
                 {id: 5, message: "Yo"},
             ],
-            newMessageBody: "",
             dialogs: [
                 {id: 1, name: "Dimych"},
                 {id: 2, name: "Andrey"},

@@ -3,13 +3,11 @@ import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 const SET_USER_STATUS = "SET_USER_STATUS";
 
 export type ProfileActionsType =
     ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof updateNewPostTextActionCreator> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setUserStatus>
 
@@ -20,7 +18,6 @@ let initialState: ProfilePageType = {
         {id: 3, message: "Blabla", likesCount: 5},
         {id: 4, message: "Dadada", likesCount: 14}
     ],
-    newPostText: "",
     profile: null,
     status: ""
 };
@@ -30,7 +27,7 @@ const profileReducer = (state = initialState, action: ProfileActionsType) => {
         case ADD_POST:
             const newPost: PostType = {
                 id: new Date().getTime(),
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             };
             return {
@@ -38,13 +35,6 @@ const profileReducer = (state = initialState, action: ProfileActionsType) => {
                 posts: [...state.posts, newPost],
                 newPostText: ""
             };
-        case UPDATE_NEW_POST_TEXT: {
-            return {
-                ...state,
-                newPostText: action.newPostText
-            }
-        }
-
         case SET_USER_PROFILE: {
             return {
                 ...state,
@@ -62,9 +52,10 @@ const profileReducer = (state = initialState, action: ProfileActionsType) => {
     }
 }
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (newPostText: string) => {
     return {
         type: ADD_POST,
+        newPostText
     } as const
 }
 export const setUserProfile = (profile: ProfileType) => {
@@ -102,12 +93,5 @@ export const updateUserStatus = (status: string) => (dispatch: Dispatch) => {
                 // dispatch(setUserStatus(response.data));
             }
     });
-}
-
-export const updateNewPostTextActionCreator = (newPostText: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newPostText: newPostText
-    } as const
 }
 export default profileReducer
