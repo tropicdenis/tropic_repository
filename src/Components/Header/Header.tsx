@@ -12,7 +12,8 @@ const Header = (props: HeaderPropsType) => {
         <header className={s.header}>
             <img src={'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/1024px-NASA_logo.svg.png'}/>
             <div className={s.loginBlock}>
-                {props.isAuth ? <NavLink to={'/profile/16100'}>{props.login}</NavLink>
+                {props.isAuth ? <NavLink to={'/profile/16100'}>{props.login}
+                <button onClick={props.logout}>Log out</button> </NavLink>
                     :<NavLink to={'/login'}>Login</NavLink>
                 }
             </div>
