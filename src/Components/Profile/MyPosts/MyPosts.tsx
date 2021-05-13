@@ -5,12 +5,11 @@ import {PostType} from "../../../Redux/Store";
 import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
+import {addPostActionCreator} from "../../../Redux/ProfileReducer";
 
 type MyPostsPropsType = {
     posts: Array<PostType>
-    newPostText: string
-    updateNewPostText: (text: string) => void
-    addPost: () => void
+    addPostActionCreator: (text: string) => void
 }
 
 
@@ -19,8 +18,8 @@ const MyPosts = (props: MyPostsPropsType) => {
     let postsElements = props.posts.map(p => <Post message={p.message}
                                                                likesCount={p.likesCount}/>)
 
-    let onAddPost = (values: ) => {
-        props.addPost(values.newPostText);
+    let onAddPost = (values: any ) => {
+        props.addPostActionCreator(values.newPostText);
     }
 
     return (
@@ -36,7 +35,7 @@ const MyPosts = (props: MyPostsPropsType) => {
 
 const maxLength10 = maxLengthCreator(10)
 
-let AddNewPostForm = (props:) => {
+let AddNewPostForm = (props: any) => {
     return(
         <form onSubmit={props.handleSubmit}>
             <div>

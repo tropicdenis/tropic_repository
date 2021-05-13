@@ -1,7 +1,7 @@
 import React from "react";
-import styles from '/FormControls.module.css';
+import styles from './FormControls.module.css';
 
-export const FormControl = ({input, meta, ...props}) => {
+export const FormControl = ({input, meta, ...props}: any) => {
     const hasError = meta.touched && meta.error;
 
     return(
@@ -15,15 +15,15 @@ export const FormControl = ({input, meta, ...props}) => {
     )
 }
 
-export const Textarea = (props:) => {
+export const Textarea = (props: any) => {
     const {input, meta, children, ...restProps} = props;
     return (
-        <FormControl {...props}><textarea {...input} {...restProps} /><FormControl/>
+        <FormControl {...props}><textarea {...input} {...restProps} /></FormControl>
 )};
 
-export const Input = (props:) => {
+export const Input = (props: any) => {
             const {input, meta, children, ...restProps} = props;
         return (
-            <FormControl {...props}><input {...input} {...restProps} /><FormControl/>
+            <FormControl {...props}><input {...input} {...restProps} /></FormControl>
 
 )};

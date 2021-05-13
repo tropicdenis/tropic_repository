@@ -4,8 +4,14 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/redux_store";
 import {getAuthUserData, logout} from "../../Redux/auth_reducer";
 
+type HeaderContainerType = {
+    isAuth: boolean
+    login: string | null
+    logout: () => void
+    getAuthUserData: () => void
+}
 
-class HeaderContainer extends React.Component<any, any> {
+class HeaderContainer extends React.Component<HeaderContainerType, any> {
     componentDidMount() {
         this.props.getAuthUserData();
     }
@@ -13,8 +19,7 @@ class HeaderContainer extends React.Component<any, any> {
     render() {
         return (
             <Header
-                isAuth={this.props.isAuth}
-                login={this.props.login}
+                {...this.props}
             />
         );
     }
