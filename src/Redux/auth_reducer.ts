@@ -52,7 +52,6 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
         });
 }
 
-export const login = (formData: FormDataType) => (dispatch: ThunkDispatch<AppStateType, unknown, ActionsType | FormAction>) => {
 
     authAPI.login(formData)
         .then(response => {
