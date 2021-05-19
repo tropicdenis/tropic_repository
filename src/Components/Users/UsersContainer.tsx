@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {
     follow,
-    getUsers,
+    requestUsers,
     setCurrentPage,
     toggleIsFollowingProgress,
     unfollow,
@@ -11,8 +11,15 @@ import {
 import {AppStateType} from "../../Redux/redux_store";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../Redux/users_selectors";
 
 
 type MapStateToPropsType = {
@@ -55,14 +62,27 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 }
 
+// let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+//         return {
+//             users: state.usersPage.users,
+//             pageSize: state.usersPage.pageSize,
+//             totalUsersCount: state.usersPage.totalUsersCount,
+//             currentPage: state.usersPage.currentPage,
+//             isFetching: state.usersPage.isFetching,
+//             folowingInProgress: state.usersPage.folowingInProgress
+//
+//
+//         }
+//     }
+// ;
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         return {
-            users: state.usersPage.users,
-            pageSize: state.usersPage.pageSize,
-            totalUsersCount: state.usersPage.totalUsersCount,
-            currentPage: state.usersPage.currentPage,
-            isFetching: state.usersPage.isFetching,
-            folowingInProgress: state.usersPage.folowingInProgress
+            users: getUsers(state),
+            pageSize: getPageSize(state),
+            totalUsersCount: getTotalUsersCount(state),
+            currentPage: getCurrentPage(state),
+            isFetching: getIsFetching(state),
+            folowingInProgress: getFollowingInProgress(state)
 
 
         }
@@ -84,6 +104,6 @@ type MapDispatchToPropsType =
 
 export default compose<React.ComponentType>(
     connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {
-        follow, unfollow, setCurrentPage, toggleIsFollowingProgress, getUsers
+        follow, unfollow, setCurrentPage, toggleIsFollowingProgress, getUsers: requestUsers
     })
 )(UsersContainer)

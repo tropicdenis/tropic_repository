@@ -1,9 +1,8 @@
 import {authAPI} from "../api/api";
 import {Dispatch} from "redux";
-import {FormAction, stopSubmit} from "redux-form";
-import {ThunkDispatch} from "redux-thunk";
+import {stopSubmit} from "redux-form";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./redux_store";
-import {FormDataType} from "../Components/Login/Login";
 
 type InitialStateType = {
     id: number | null
@@ -42,8 +41,8 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
     } as const
 };
 
-export const getAuthUserData = () => (dispatch: Dispatch) => {
-    authAPI.me()
+export const getAuthUserData = (): ThunkType => (dispatch: ThunkDispatchType) => {
+    return authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data
@@ -52,8 +51,12 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
         });
 }
 
+type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 
-    authAPI.login(formData)
+type ThunkDispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
+
+export const login = (email: string, password: string, rememberMe: boolean = false) => (dispatch: ThunkDispatchType) => {
+    authAPI.login(email, password, rememberMe = false)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getAuthUserData());
@@ -61,12 +64,12 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
                 let message = response.data.messages.length >0 ?
                     response.data.messages[0]
                     : "Some error"
-                dispatch(stopSubmit("login", {_error: "Common error"}));
+                dispatch(stopSubmit("login", {_error: "Common error"}) as ActionsType) ;
             }
         });
 }
 
-export const logout = () => (dispatch: Dispatch) => {
+export const logout = ():ThunkType => (dispatch: ThunkDispatchType) => {
     authAPI.logout()
         .then(response => {
             if (response.data.resultCode === 0) {
