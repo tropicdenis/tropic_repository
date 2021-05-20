@@ -1,11 +1,10 @@
 import React from "react";
 import s from './ProfileInfo.module.css';
 import {ProfileType} from "../../../Redux/Store";
-import ProfileStatus from './ProfileStatus'
 
 
 type PropsType = {
-    profile: ProfileType
+    profile: ProfileType | null
     status: string
     updateStatus: () => void
 }
@@ -15,10 +14,10 @@ const ProfileInfo = (props: PropsType) => {
         <div>
             <div>
                 <img
-                    src={'https://static9.depositphotos.com/1594308/1110/i/600/depositphotos_11107478-stock-photo-fantasy.jpg'}></img>
+                    src={'https://static9.depositphotos.com/1594308/1110/i/600/depositphotos_11107478-stock-photo-fantasy.jpg'} alt={'#'}/>
             </div>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large}/>
+                <img src={props.profile?.photos.large}/>
                 {/*<ProfileStatus profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>*/}
             </div>
 

@@ -52,11 +52,9 @@ const Login = (props: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
             props.login(formData.email, formData.password, formData.rememberMe);
     }
+    debugger
 
-    if (props.isAuth) {
-        return <Redirect to={"/profile"} />
-    }
-
+    if (props.isAuth) <Redirect to={"/profile"} />
     return (
         <div>
             <h1>Login</h1>

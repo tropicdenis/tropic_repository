@@ -37,7 +37,6 @@ type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 
 type ThunkDispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-
 export const initializeApp = ():ThunkType => (dispatch: ThunkDispatchType) => {
     let promise = dispatch(getAuthUserData());
     Promise.all([promise])

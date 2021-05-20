@@ -4,7 +4,7 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "../../Redux/Store";
 
 type PropsType = {
-    profile: ProfileType
+    profile: ProfileType | null
     status: string
     updateStatus: ()=> void
 }

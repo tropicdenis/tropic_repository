@@ -44,15 +44,17 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     render() {
-
         return (
             <div>
                 Hello
-                {!this.props.profile
+                {/*{!this.props.profile
                     ? <Preloader/>
                     : <Profile {...this.props} profile={this.props.profile}
                 status={this.props.status} updateStatus={this.props.updateUserStatus}
-                />}
+                />}*/}
+                <Profile {...this.props} profile={this.props.profile}
+                         status={this.props.status} updateStatus={this.props.updateUserStatus}
+                />
             </div>
         );
     }
@@ -65,13 +67,12 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         authorizedUserId: state.auth.id,
         isAuth: state.auth.isAuth
     }
-
 };
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus}),
     withRouter,
     withAuthRedirect
-) (ProfileContainer)
+)(ProfileContainer)
 
 
