@@ -1,6 +1,7 @@
 import React from "react";
 import s from './ProfileInfo.module.css';
 import {ProfileType} from "../../../Redux/Store";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 
 type PropsType = {
@@ -18,7 +19,7 @@ const ProfileInfo = (props: PropsType) => {
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile?.photos.large}/>
-                {/*<ProfileStatus profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>*/}
+                <ProfileStatusWithHooks profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             </div>
 
         </div>
