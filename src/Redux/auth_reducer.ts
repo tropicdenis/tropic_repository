@@ -11,7 +11,7 @@ type InitialStateType = {
     isAuth: boolean
 }
 
-const SET_USER_DATA = 'SET_USER_DATA';
+const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA';
 
 let initialState: InitialStateType = {
     id: null,
@@ -41,45 +41,45 @@ const authReducer = (state = initialState, action: ActionsType): InitialStateTyp
 export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => {
     return {
         type: SET_USER_DATA,
-        payload:{userId, login, email, isAuth}
+        payload: {userId, login, email, isAuth}
     } as const
 };
 
-export const getAuthUserData = (): ThunkType => (dispatch: ThunkDispatchType) => {
-    return authAPI.me()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                let {id, email, login} = response.data.data
-                dispatch(setAuthUserData(id, email, login, true));
-            }
-        });
+export const getAuthUserData = (): ThunkType => async (dispatch: ThunkDispatchType) => {
+    let response = await authAPI.me()
+
+    if (response.data.resultCode === 0) {
+        let {id, email, login} = response.data.data
+        dispatch(setAuthUserData(id, email, login, true));
+    }
 }
+
 
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 
 type ThunkDispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const login = (email: string, password: string, rememberMe: boolean = false) => (dispatch: ThunkDispatchType) => {
-    authAPI.login(email, password, rememberMe = false)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(getAuthUserData());
-            } else {
-                let message = response.data.messages.length >0 ?
-                    response.data.messages[0]
-                    : "Some error"
-                dispatch(stopSubmit("login", {_error: "Common error"}) as ActionsType) ;
-            }
-        });
+export const login = (email: string, password: string, rememberMe: boolean = false) => async (dispatch: ThunkDispatchType) => {
+    let response = await authAPI.login(email, password, rememberMe = false)
+
+    if (response.data.resultCode === 0) {
+        dispatch(getAuthUserData());
+    } else {
+        let message = response.data.messages.length > 0 ?
+            response.data.messages[0]
+            : "Some error"
+        dispatch(stopSubmit("login", {_error: "Common error"}) as ActionsType);
+    }
+
 }
 
-export const logout = ():ThunkType => (dispatch: ThunkDispatchType) => {
-    authAPI.logout()
-        .then(response => {
+export const logout = (): ThunkType => async (dispatch: ThunkDispatchType) => {
+    let response = await authAPI.logout()
+
             if (response.data.resultCode === 0) {
                 dispatch(setAuthUserData(null, null, null, false));
             }
-        });
+
 }
 
 export default authReducer;
