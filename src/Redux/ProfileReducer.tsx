@@ -89,6 +89,7 @@ export const updateUserStatus = (status: string) => async (dispatch: Dispatch) =
 
     if (response.data.resultCode === 0) {
         // dispatch(setUserStatus(response.data));
+
     }
 }
 export default profileReducer
