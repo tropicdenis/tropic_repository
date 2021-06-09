@@ -104,6 +104,17 @@ const usersReducer = (state = initialState, action: ActionsType): InitialStateTy
     }
 }
 
+export const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod, actionCreator) => {
+    dispatch(toggleIsFollowingProgress(true, userId))
+    let response = await apiMethod(userId)
+
+    if (response.data.resultCode === 0) {
+        dispatch(actionCreator(userId));
+    }
+    dispatch(toggleIsFollowingProgress(false, userId))
+
+}
+
 export const followSuccess = (userId: number) => {
     return {
         type: FOLLOW,
@@ -149,41 +160,28 @@ export const toggleIsFollowingProgress = (isFetching: boolean, userId: number) =
 }
 
 export const requestUsers = (currentPage: number, pageSize: number) => {
-    return (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch) => {
         dispatch(toggleIsFetching(true));
         dispatch(setCurrentPage(currentPage));
 
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
-            dispatch(toggleIsFetching(false));
-            dispatch(setUsers(data.items));
-            dispatch(setTotalUsersCount(data.totalCount));
-        });
+        let data = await usersAPI.getUsers(currentPage, pageSize)
+
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUsersCount(data.totalCount));
+
     }
 }
 
 export const follow = (userId: number) => {
-    return (dispatch: Dispatch) => {
-       dispatch(toggleIsFollowingProgress(true, userId))
-        usersAPI.follow(userId)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                   dispatch(followSuccess(userId));
-                }
-                dispatch(toggleIsFollowingProgress(false, userId))
-            });
+    return async (dispatch: Dispatch) => {
+        followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), followSuccess)
     }
 }
 
 export const unfollow = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        dispatch(toggleIsFollowingProgress(true, userId))
-        usersAPI.unfollow(userId)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(unfollowSuccess(userId));
-                }
-                dispatch(toggleIsFollowingProgress(false, userId))
-            });
+    return async (dispatch: Dispatch) => {
+        followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), unfollowSuccess)
     }
 }
 
