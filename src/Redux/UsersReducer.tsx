@@ -1,6 +1,7 @@
 import {ActionsType} from "./Store";
 import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {updateObjectIbArray} from "../utils/object-helper";
 
 type PhotosType = {
     small: string
@@ -55,22 +56,12 @@ const usersReducer = (state = initialState, action: ActionsType): InitialStateTy
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return {...u, followed: true}
-                    }
-                    return u;
-                })
+                users: updateObjectIbArray(state.users, action.userId, "id", followed: true)
             };
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return {...u, followed: false}
-                    }
-                    return u;
-                })
+                users: updateObjectIbArray(state.users, action.userId, "id", followed: false)
             }
         case SET_USERS:
             return {
