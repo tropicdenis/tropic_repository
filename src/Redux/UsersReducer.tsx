@@ -57,7 +57,7 @@ const usersReducer = (state = initialState, action: ActionsType): InitialStateTy
             return {
                 ...state,
                 users: updateObjectIbArray(state.users, action.userId, "id", followed: true)
-            };
+            }
         case UNFOLLOW:
             return {
                 ...state,

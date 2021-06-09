@@ -9,7 +9,7 @@ type PropsType = {
     status: string
     updateStatus: () => void
 }
-const ProfileInfo = (props: PropsType) => {
+const ProfileInfo = ({profile, status, updateStatus}: PropsType) => {
 
     return (
         <div>
@@ -18,8 +18,8 @@ const ProfileInfo = (props: PropsType) => {
                     src={'https://static9.depositphotos.com/1594308/1110/i/600/depositphotos_11107478-stock-photo-fantasy.jpg'} alt={'#'}/>
             </div>
             <div className={s.descriptionBlock}>
-                <img src={props.profile?.photos.large}/>
-                <ProfileStatusWithHooks profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+                <img src={profile?.photos.large}/>
+                <ProfileStatusWithHooks profile={profile} status={status} updateStatus={updateStatus}/>
             </div>
 
         </div>
