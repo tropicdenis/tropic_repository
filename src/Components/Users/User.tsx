@@ -3,7 +3,6 @@ import styles from "./users.module.css";
 import userPhoto from "../../assets/images/user-avatar.jpg";
 import {NavLink} from 'react-router-dom';
 import {UserType} from "../../Redux/UsersReducer";
-import Paginator from "../common/Paginator/Paginator";
 
 type PropsType = {
     totalUsersCount: number

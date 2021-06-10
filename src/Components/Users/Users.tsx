@@ -4,7 +4,7 @@ import Paginator from "../common/Paginator/Paginator";
 import User from "./User";
 
 type PropsType = {
-    totalUsersCount: number
+    totalItemsCount: number
     pageSize: number
     currentPage: number
     onPageChanged: (page: number) => void
@@ -12,17 +12,14 @@ type PropsType = {
     unfollow: (userId: number) => void
     follow: (userId: number) => void
     folowingInProgress: Array<number>
+    portionSize: number
 }
-let Users = ({totalUsersCount, pageSize, currentPage, onPageChanged, users, ...props}: PropsType) => {
-    let pagesCount = Math.ceil(totalUsersCount / pageSize);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
+let Users = ({totalItemsCount, pageSize, currentPage, onPageChanged, users,portionSize, ...props}: PropsType) => {
+
     return (
         <div>
-            <Paginator totalUsersCount={totalUsersCount} currentPage={currentPage}
-                       onPageChanged={onPageChanged} pageSize={pageSize}/>
+            <Paginator totalItemsCount={totalItemsCount} currentPage={currentPage}
+                       onPageChanged={onPageChanged} pageSize={pageSize} portionSize={portionSize}/>
 
             {
                 users.map(u => <User user={u} folowingInProgress={props.folowingInProgress}

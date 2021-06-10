@@ -5,9 +5,7 @@ import {Route, withRouter} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
-import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
 import {connect} from "react-redux";
@@ -15,6 +13,11 @@ import {compose} from "redux";
 import {initializeApp} from "./Redux/app_reducer";
 import {AppStateType} from "./Redux/redux_store";
 import Preloader from "./Components/common/Preloader/Preloader";
+import { Suspense } from 'react';
+import {withSuspense} from "./hoc/WithSuspense";
+
+const DialogsContainer = React.lazy(()=> import("./Components/Dialogs/DialogsContainer"));
+const ProfileContainer = React.lazy(()=> import("./Components/Profile/ProfileContainer"));
 
 type AppPropsType = {
     getAuthUserData: () => void
@@ -40,10 +43,10 @@ class App extends React.Component<AppPropsType> {
                 <div className='app-wrapper-content'>
                     <Route
                         path='/dialogs'
-                        render={() => <DialogsContainer/>}/>
+                        render={withSuspense(DialogsContainer)}/>
                     <Route
                         path='/profile/:userId?'
-                        render={() => <ProfileContainer/>}/>
+                        render={withSuspense(ProfileContainer)}/>
                     <Route
                         path='/users'
                         render={() => <UsersContainer/>}/>
