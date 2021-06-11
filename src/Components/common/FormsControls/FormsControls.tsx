@@ -32,8 +32,8 @@ export const Input = (props: any) => {
     )
 };
 
-export const createField = (placeholder: string | null, name: string, validators: string,
-                            component: string, props?: any, text?: "" | string) => (
+export const createField = (placeholder: string | null, name: string, validators: any[],
+                            component: (props: any) => JSX.Element, props?: any, text?: "" | string) => (
     <div>
         <Field placeholder={placeholder}
                name={name}

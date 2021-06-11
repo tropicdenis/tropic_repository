@@ -56,12 +56,12 @@ const usersReducer = (state = initialState, action: ActionsType): InitialStateTy
         case FOLLOW:
             return {
                 ...state,
-                users: updateObjectIbArray(state.users, action.userId, "id", followed: true)
+                users: updateObjectIbArray(state.users, action.userId, "id", {followed: true})
             }
         case UNFOLLOW:
             return {
                 ...state,
-                users: updateObjectIbArray(state.users, action.userId, "id", followed: false)
+                users: updateObjectIbArray(state.users, action.userId, "id", {followed: false})
             }
         case SET_USERS:
             return {
@@ -95,7 +95,7 @@ const usersReducer = (state = initialState, action: ActionsType): InitialStateTy
     }
 }
 
-export const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod, actionCreator) => {
+export const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: any, actionCreator: any) => {
     dispatch(toggleIsFollowingProgress(true, userId))
     let response = await apiMethod(userId)
 

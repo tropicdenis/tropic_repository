@@ -18,11 +18,14 @@ let rootReducer = combineReducers({
     form: formReducer,
     app: appReducer
 });
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...thunkMiddleware)));
+
+
+const middlewareEnhancer = applyMiddleware(thunkMiddleware)
+const composedEnhancers = compose(middlewareEnhancer)
+
+const store = createStore(rootReducer, composedEnhancers);
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
-window.store = store;
 
 export default store;
