@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/tropic_social_network/static/css/main.71f3031d.chunk.css",
-    "main.js": "/tropic_social_network/static/js/main.77345403.chunk.js",
-    "main.js.map": "/tropic_social_network/static/js/main.77345403.chunk.js.map",
+    "main.js": "/tropic_social_network/static/js/main.c502f406.chunk.js",
+    "main.js.map": "/tropic_social_network/static/js/main.c502f406.chunk.js.map",
     "runtime-main.js": "/tropic_social_network/static/js/runtime-main.2add001a.js",
     "runtime-main.js.map": "/tropic_social_network/static/js/runtime-main.2add001a.js.map",
     "static/js/2.59d3968c.chunk.js": "/tropic_social_network/static/js/2.59d3968c.chunk.js",
@@ -25,6 +25,6 @@
     "static/js/runtime-main.2add001a.js",
     "static/js/2.59d3968c.chunk.js",
     "static/css/main.71f3031d.chunk.css",
-    "static/js/main.77345403.chunk.js"
+    "static/js/main.c502f406.chunk.js"
   ]
 }
