@@ -121,13 +121,12 @@ let store: StoreType = {
         this._callSubscriber = observer //набллюдатель
     },
 
-    dispatch(action: ActionsType) {
+    dispatch(action: any) {
 
-        this._state.profilePage = profileReducer(this._state.profilePage, action);
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
-        this._state.friends = friendsReducer(this._state.friends, action)
-
-        this._callSubscriber();
+        // this._state.profilePage = profileReducer(this._state.profilePage, action);
+        // this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        // this._state.friends = friendsReducer(this._state.friends, action)
+        // this._callSubscriber();
     }
 }
 

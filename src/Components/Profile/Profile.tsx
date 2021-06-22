@@ -4,14 +4,21 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "../../Redux/Store";
 
 type PropsType = {
+    isOwner: boolean
     profile: ProfileType | null
     status: string
     updateStatus: ()=> void
+    savePhoto: () => void
 }
 const Profile = (props: PropsType) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+            <ProfileInfo isOwner={props.isOwner}
+                         profile={props.profile}
+                         status={props.status}
+                         updateStatus={props.updateStatus}
+                         savePhoto={props.savePhoto}
+            />
             <MyPostsContainer />
         </div>
     );

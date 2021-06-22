@@ -1,15 +1,17 @@
-import {PostType, ProfilePageType, ProfileType} from "./Store";
+import {PhotosType, PostType, ProfilePageType, ProfileType} from "./Store";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 const SET_USER_STATUS = "SET_USER_STATUS";
+const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS"
 
 export type ProfileActionsType =
     ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setUserProfile> |
-    ReturnType<typeof setUserStatus>
+    ReturnType<typeof setUserStatus> |
+    ReturnType<typeof savePhotoSuccess>
 
 let initialState: ProfilePageType = {
     posts: [
@@ -22,7 +24,7 @@ let initialState: ProfilePageType = {
     status: ""
 };
 
-const profileReducer = (state = initialState, action: ProfileActionsType) => {
+const profileReducer = (state = initialState, action: ProfileActionsType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
             const newPost: PostType = {
@@ -32,8 +34,7 @@ const profileReducer = (state = initialState, action: ProfileActionsType) => {
             };
             return {
                 ...state,
-                posts: [...state.posts, newPost],
-                newPostText: ""
+                posts: [...state.posts, newPost]
             };
         case SET_USER_PROFILE: {
             return {
@@ -47,6 +48,13 @@ const profileReducer = (state = initialState, action: ProfileActionsType) => {
                 status: action.status
             }
         }
+        case SAVE_PHOTO_SUCCESS: {
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos} as ProfileType
+            }
+        }
+
         default :
             return state
     }
@@ -71,6 +79,12 @@ export const setUserStatus = (status: string) => {
         status
     } as const
 }
+export const savePhotoSuccess = (photos: PhotosType) => {
+    return {
+        type: SAVE_PHOTO_SUCCESS,
+        photos
+    } as const
+}
 
 export const getUserProfile = (userId: number) => async (dispatch: Dispatch) => {
     let response = await usersAPI.getProfile(userId)
@@ -79,8 +93,8 @@ export const getUserProfile = (userId: number) => async (dispatch: Dispatch) => 
 }
 
 export const getUserStatus = (userId: number) => async (dispatch: Dispatch) => {
-    let response = await profileAPI.getStatus(userId)
 
+    let response = await profileAPI.getStatus(userId)
     dispatch(setUserStatus(response.data));
 }
 
@@ -89,6 +103,15 @@ export const updateUserStatus = (status: string) => async (dispatch: Dispatch) =
 
     if (response.data.resultCode === 0) {
         // dispatch(setUserStatus(response.data));
+
+    }
+}
+
+export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.savePhoto(file)
+
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos));
 
     }
 }
