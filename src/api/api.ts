@@ -1,5 +1,6 @@
 import axios from "axios";
 import {FormDataType} from "../Components/Login/Login";
+import {ProfileType} from "../Redux/Store";
 
 const instance = axios.create({
     withCredentials: true,
@@ -47,7 +48,11 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         })
+    },
+    saveProfile(profile: ProfileType) {
+        return instance.put(`profile`, profile);
     }
+
 };
 
 export const authAPI = {
