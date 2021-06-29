@@ -3,10 +3,13 @@ import {PropsType} from "./ProfileInfo";
 import {createField, Input, Textarea} from "../../common/FormsControls/FormsControls";
 import reduxForm from "redux-form";
 
-const ProfileDataForm = ({handleSubmit}: PropsType) => {
+const ProfileDataForm = ({handleSubmit, profile, error}: PropsType) => {
     return <form onSubmit={handleSubmit}>
         <div>
             <button onChange={handleSubmit}>save</button>
+            {error && <div className={style.formSummaryForm}>
+                {error}</div>}
+
         </div>
         <div>
             <b>Full name</b>:
@@ -28,13 +31,13 @@ const ProfileDataForm = ({handleSubmit}: PropsType) => {
                 "aboutMe",
                 [], Textarea)}
         </div>
-        {/*<div>
+        <div>
             <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
-            return <Contact key={key} contactTitle={key}
-                            contactValue={profile.contacts[key]}/>
+            return <div className={s.contact}>
+            <b>{key}: {createField(key,"contacts" + key, [], Input )}</b>
+            </div>
         })}
-
-        </div>*/}
+        </div>
     </form>
 }
 
