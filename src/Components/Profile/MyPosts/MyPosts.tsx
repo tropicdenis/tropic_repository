@@ -12,7 +12,7 @@ type MyPostsPropsType = {
     addPostActionCreator: (text: string) => void
 }
 let AddNewPostForm = (props: any) => {
-    return(
+    return (
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field name="newPostText" component={Textarea}
@@ -29,10 +29,11 @@ let AddNewPostFormRedux = reduxForm({form: "ProfileAddNewPostForm"})(AddNewPostF
 
 const MyPosts = React.memo((props: MyPostsPropsType) => {
 
-    let postsElements = props.posts.map(p => <Post message={p.message}
-                                                               likesCount={p.likesCount}/>)
+    let postsElements = props.posts.map(p => <Post key={p.id}
+                                                   message={p.message}
+                                                   likesCount={p.likesCount}/>)
 
-    let onAddPost = (values: any ) => {
+    let onAddPost = (values: any) => {
         props.addPostActionCreator(values.newPostText);
     }
 
@@ -48,9 +49,6 @@ const MyPosts = React.memo((props: MyPostsPropsType) => {
 })
 
 const maxLength10 = maxLengthCreator(10)
-
-
-
 
 
 export default MyPosts
