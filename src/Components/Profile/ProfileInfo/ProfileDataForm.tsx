@@ -33,7 +33,7 @@ const ProfileDataForm = ({handleSubmit, profile, error}: PropsType) => {
         </div>
         <div>
             <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
-            return <div ket={key} className={s.contact}>
+            return <div key={key} className={s.contact}>
             <b>{key}: {createField(key,"contacts" + key, [], Input )}</b>
             </div>
         })}
