@@ -13,11 +13,10 @@ import {compose} from "redux";
 import {initializeApp} from "./Redux/app_reducer";
 import {AppStateType} from "./Redux/redux_store";
 import Preloader from "./Components/common/Preloader/Preloader";
-import { Suspense } from 'react';
 import {withSuspense} from "./hoc/WithSuspense";
 
-const DialogsContainer = React.lazy(()=> import("./Components/Dialogs/DialogsContainer"));
-const ProfileContainer = React.lazy(()=> import("./Components/Profile/ProfileContainer"));
+const DialogsContainer = React.lazy(() => import("./Components/Dialogs/DialogsContainer"));
+const ProfileContainer = React.lazy(() => import("./Components/Profile/ProfileContainer"));
 
 type AppPropsType = {
     getAuthUserData: () => void

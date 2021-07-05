@@ -12,6 +12,7 @@ export type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
+    captcha: string
 
 }
 
@@ -22,6 +23,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, err
                     {createField("Password", "password", [required], Input, {type:"password"})}
                     {createField(null, "rememberMe", [], Input, {type: "checkbox"}, "remember me")}
                 {captchaUrl && <img src={captchaUrl}/>}
+                {captchaUrl && createField("Symbols from image", "captcha", [required], Input, {})}
                 {error && <div className={style.formSummaryError}>
                     {error}
                 </div> }
@@ -36,13 +38,13 @@ const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm);
 
 type LoginPropsType = {
     isAuth: boolean
-    login: (email: string, password: string, rememberMe: boolean) => void
+    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
     captchaUrl: string | null
 }
 
 const Login = (props: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
-            props.login(formData.email, formData.password, formData.rememberMe);
+            props.login(formData.email, formData.password, formData.rememberMe, formData.captcha);
     }
     debugger
 

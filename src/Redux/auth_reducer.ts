@@ -76,8 +76,8 @@ type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 
 type ThunkDispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const login = (email: string, password: string, rememberMe: boolean = false) => async (dispatch: ThunkDispatchType) => {
-    let response = await authAPI.login(email, password, rememberMe = false)
+export const login = (email: string, password: string, rememberMe: boolean = false, captcha: string) => async (dispatch: ThunkDispatchType) => {
+    let response = await authAPI.login(email, password, rememberMe = false, captcha)
 
     if (response.data.resultCode === 0) {
         dispatch(getAuthUserData());
