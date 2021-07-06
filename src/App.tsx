@@ -15,8 +15,10 @@ import {AppStateType} from "./Redux/redux_store";
 import Preloader from "./Components/common/Preloader/Preloader";
 import {withSuspense} from "./hoc/WithSuspense";
 
-const DialogsContainer = React.lazy(() => import("./Components/Dialogs/DialogsContainer"));
-const ProfileContainer = React.lazy(() => import("./Components/Profile/ProfileContainer"));
+const DialogsContainer = React.lazy(() =>
+    import("./Components/Dialogs/DialogsContainer"));
+const ProfileContainer = React.lazy(() =>
+    import("./Components/Profile/ProfileContainer"));
 
 type AppPropsType = {
     getAuthUserData: () => void
@@ -26,8 +28,18 @@ type AppPropsType = {
 }
 
 class App extends React.Component<AppPropsType> {
+    catchAllUnhandledErrors = (reason, promise) => {
+    alert("Some error occured");
+    //console.error(promiseRejectionEvent);
+}
     componentDidMount() {
         this.props.initializeApp();
+        window.addEventListener("unhandledrejection",
+            this.catchAllUnhandledErrors);
+    }
+    componentWillUnmount(){
+        window.removeEventListener("unhandledrejection",
+            this.catchAllUnhandledErrors);
     }
 
     render() {
@@ -41,6 +53,9 @@ class App extends React.Component<AppPropsType> {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route
+                        exact path='/'
+                        render={withSuspense(ProfileContainer)}/>
+                    <Route
                         path='/dialogs'
                         render={withSuspense(DialogsContainer)}/>
                     <Route
@@ -52,6 +67,9 @@ class App extends React.Component<AppPropsType> {
                     <Route
                         path='/login'
                         render={() => <Login/>}/>
+                    <Route
+                        path='*'
+                        render={() => <div>404. Page not found</div>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>
