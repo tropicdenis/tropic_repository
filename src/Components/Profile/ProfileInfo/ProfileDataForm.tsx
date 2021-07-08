@@ -1,13 +1,19 @@
 import React from "react";
 import {PropsType} from "./ProfileInfo";
 import {createField, Input, Textarea} from "../../common/FormsControls/FormsControls";
-import reduxForm from "redux-form";
+import reduxForm, {InjectedFormProps} from "redux-form";
 
-const ProfileDataForm = ({handleSubmit, profile, error}: PropsType) => {
+const ProfileDataForm: React.FC< PropsType & InjectedFormProps<{},  PropsType>> = ({handleSubmit, profile, error}) => {
+    let contacts;
+    if (profile?.contacts) { contacts = Object.keys(profile.contacts).map(key => {
+            return <div key={key} >
+                <b>{key}: {createField(key,"contacts" + key, [], Input )}</b>
+            </div>
+        })}
     return <form onSubmit={handleSubmit}>
         <div>
             <button onChange={handleSubmit}>save</button>
-            {error && <div className={style.formSummaryForm}>
+            {error && <div>
                 {error}</div>}
 
         </div>
@@ -32,11 +38,8 @@ const ProfileDataForm = ({handleSubmit, profile, error}: PropsType) => {
                 [], Textarea)}
         </div>
         <div>
-            <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
-            return <div key={key} className={s.contact}>
-            <b>{key}: {createField(key,"contacts" + key, [], Input )}</b>
-            </div>
-        })}
+            <b>Contacts</b>:
+            {contacts}
         </div>
     </form>
 }

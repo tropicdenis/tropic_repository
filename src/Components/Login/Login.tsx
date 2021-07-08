@@ -12,7 +12,7 @@ export type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
-    captcha: string
+    captchaUrl: string
 
 }
 
@@ -44,7 +44,7 @@ type LoginPropsType = {
 
 const Login = (props: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
-            props.login(formData.email, formData.password, formData.rememberMe, formData.captcha);
+            props.login(formData.email, formData.password, formData.rememberMe, formData.captchaUrl);
     }
     debugger
 
