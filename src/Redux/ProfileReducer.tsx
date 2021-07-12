@@ -2,6 +2,7 @@ import {PhotosType, PostType, ProfilePageType, ProfileType} from "./Store";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {AppStateType} from "./redux_store";
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
@@ -119,12 +120,12 @@ export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
     }
 }
 
-export const saveProfile = (profile: ProfileType) => async (dispatch: Dispatch, getState) => {
-    const userId = getState().auth.userId;
+export const saveProfile = (profile: ProfileType) => async (dispatch: any, getState: () => AppStateType) => {
+    const userId = getState().auth.id;
     const response = await profileAPI.saveProfile(profile)
 
     if (response.data.resultCode === 0) {
-        dispatch(getUserProfile(userId));
+        dispatch(getUserProfile(userId!));
         dispatch(stopSubmit("edit-profile", {_error: response.data.messages[0]}))
         return Promise.reject(response.data.messages[0]);
     }

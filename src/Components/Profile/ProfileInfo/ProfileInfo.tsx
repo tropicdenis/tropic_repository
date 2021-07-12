@@ -1,6 +1,6 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, FC, useState} from "react";
 import s from './ProfileInfo.module.css';
-import {ProfileType} from "../../../Redux/Store";
+import {ContactsType, ProfileType} from "../../../Redux/Store";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user-avatar.jpg";
 import Preloader from "../../common/Preloader/Preloader";
@@ -12,8 +12,9 @@ export type PropsType = {
     status: string
     updateStatus: () => void
     savePhoto: (file: File) => void
+    saveProfile: (profile: ProfileType) => Promise<any>
 }
-const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, saveProfile}: PropsType) => {
+const ProfileInfo: React.FC<PropsType> = ({isOwner, profile, status, updateStatus, savePhoto, saveProfile}) => {
 
     let [editMode, setEditMode] = useState(false)
 
@@ -22,14 +23,14 @@ const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, savePro
     }
 
     const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files) {
+        if (e.target.files && e.target.files.length) {
             savePhoto(e.target.files[0])
         }
     }
 
-    const onSubmit =  (formData: ProfileFormDataType) => {
-       saveProfile(formData).then()
-           // setEditMode(false)
+    const onSubmit = (formData: ProfileType) => {
+        saveProfile(formData).then()
+        setEditMode(false)
     }
 
     return (
@@ -58,7 +59,12 @@ const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, savePro
     );
 }
 
-const ProfileData = ({profile, isOwner, goToEditMode}: PropsType) => {
+type ProfileDataPropsType = {
+    profile: ProfileType
+    isOwner: boolean,
+    goToEditMode: () => void
+}
+const ProfileData : FC<ProfileDataPropsType>= ({profile, isOwner, goToEditMode}) => {
     return <div>
 
         {isOwner && <div>
@@ -83,7 +89,7 @@ const ProfileData = ({profile, isOwner, goToEditMode}: PropsType) => {
         <div>
             <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
             return <Contact key={key} contactTitle={key}
-                            contactValue={profile.contacts[key]}/>
+                            contactValue={profile.contacts[key as keyof ContactsType]}/>
         })}
 
         </div>

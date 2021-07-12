@@ -24,7 +24,7 @@ type MapDispatchToPropsType = {
     getUserStatus: (userId: number | null) => void
     updateUserStatus: () => void
     savePhoto: () => void
-    saveProfile: () => void
+    saveProfile: (profile: ProfileType) => Promise<any>
 };
 
 type OwnPropsType = MapStatePropsType & MapDispatchToPropsType;
@@ -69,6 +69,7 @@ class ProfileContainer extends React.Component<PropsType> {
                          status={this.props.status}
                          updateStatus={this.props.updateUserStatus}
                          savePhoto={this.props.savePhoto}
+                         saveProfile={this.props.saveProfile}
                 />
             </div>
         );
@@ -85,8 +86,10 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 };
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile,
-        getUserStatus, updateUserStatus, savePhoto, saveProfile}), withRouter,
+    connect(mapStateToProps, {
+        getUserProfile,
+        getUserStatus, updateUserStatus, savePhoto, saveProfile
+    }), withRouter,
     withAuthRedirect
 )(ProfileContainer)
 

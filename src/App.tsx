@@ -28,9 +28,9 @@ type AppPropsType = {
 }
 
 class App extends React.Component<AppPropsType> {
-    catchAllUnhandledErrors = (reason: any, promise: any) => {
-    alert("Some error occured");
-    //console.error(promiseRejectionEvent);
+    catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
+    // alert("Some error occured");
+    // console.error(e);
 }
     componentDidMount() {
         this.props.initializeApp();
