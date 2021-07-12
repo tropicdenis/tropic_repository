@@ -1,30 +1,30 @@
 {
   "files": {
-    "main.css": "/tropic_social_network/static/css/main.71f3031d.chunk.css",
-    "main.js": "/tropic_social_network/static/js/main.9b6dcee0.chunk.js",
-    "main.js.map": "/tropic_social_network/static/js/main.9b6dcee0.chunk.js.map",
-    "runtime-main.js": "/tropic_social_network/static/js/runtime-main.20bba7c4.js",
-    "runtime-main.js.map": "/tropic_social_network/static/js/runtime-main.20bba7c4.js.map",
-    "static/js/2.f73d8c56.chunk.js": "/tropic_social_network/static/js/2.f73d8c56.chunk.js",
-    "static/js/2.f73d8c56.chunk.js.map": "/tropic_social_network/static/js/2.f73d8c56.chunk.js.map",
-    "static/css/3.6f524b96.chunk.css": "/tropic_social_network/static/css/3.6f524b96.chunk.css",
-    "static/js/3.951208e3.chunk.js": "/tropic_social_network/static/js/3.951208e3.chunk.js",
-    "static/js/3.951208e3.chunk.js.map": "/tropic_social_network/static/js/3.951208e3.chunk.js.map",
-    "static/css/4.a0a7a696.chunk.css": "/tropic_social_network/static/css/4.a0a7a696.chunk.css",
-    "static/js/4.df5bbeb7.chunk.js": "/tropic_social_network/static/js/4.df5bbeb7.chunk.js",
-    "static/js/4.df5bbeb7.chunk.js.map": "/tropic_social_network/static/js/4.df5bbeb7.chunk.js.map",
+    "main.css": "/tropic_social_network/static/css/main.fcf7a389.chunk.css",
+    "main.js": "/tropic_social_network/static/js/main.a6b02b6b.chunk.js",
+    "main.js.map": "/tropic_social_network/static/js/main.a6b02b6b.chunk.js.map",
+    "runtime-main.js": "/tropic_social_network/static/js/runtime-main.3d3a1e58.js",
+    "runtime-main.js.map": "/tropic_social_network/static/js/runtime-main.3d3a1e58.js.map",
+    "static/js/2.746a0c23.chunk.js": "/tropic_social_network/static/js/2.746a0c23.chunk.js",
+    "static/js/2.746a0c23.chunk.js.map": "/tropic_social_network/static/js/2.746a0c23.chunk.js.map",
+    "static/css/3.c34bea2e.chunk.css": "/tropic_social_network/static/css/3.c34bea2e.chunk.css",
+    "static/js/3.f80ad7f4.chunk.js": "/tropic_social_network/static/js/3.f80ad7f4.chunk.js",
+    "static/js/3.f80ad7f4.chunk.js.map": "/tropic_social_network/static/js/3.f80ad7f4.chunk.js.map",
+    "static/css/4.e881918a.chunk.css": "/tropic_social_network/static/css/4.e881918a.chunk.css",
+    "static/js/4.1085f6e9.chunk.js": "/tropic_social_network/static/js/4.1085f6e9.chunk.js",
+    "static/js/4.1085f6e9.chunk.js.map": "/tropic_social_network/static/js/4.1085f6e9.chunk.js.map",
     "index.html": "/tropic_social_network/index.html",
-    "static/css/3.6f524b96.chunk.css.map": "/tropic_social_network/static/css/3.6f524b96.chunk.css.map",
-    "static/css/4.a0a7a696.chunk.css.map": "/tropic_social_network/static/css/4.a0a7a696.chunk.css.map",
-    "static/css/main.71f3031d.chunk.css.map": "/tropic_social_network/static/css/main.71f3031d.chunk.css.map",
-    "static/js/2.f73d8c56.chunk.js.LICENSE.txt": "/tropic_social_network/static/js/2.f73d8c56.chunk.js.LICENSE.txt",
+    "static/css/3.c34bea2e.chunk.css.map": "/tropic_social_network/static/css/3.c34bea2e.chunk.css.map",
+    "static/css/4.e881918a.chunk.css.map": "/tropic_social_network/static/css/4.e881918a.chunk.css.map",
+    "static/css/main.fcf7a389.chunk.css.map": "/tropic_social_network/static/css/main.fcf7a389.chunk.css.map",
+    "static/js/2.746a0c23.chunk.js.LICENSE.txt": "/tropic_social_network/static/js/2.746a0c23.chunk.js.LICENSE.txt",
     "static/media/__Iphone-spinner-1.4c0dabf6.gif": "/tropic_social_network/static/media/__Iphone-spinner-1.4c0dabf6.gif",
-    "static/media/user-avatar.60b92e78.jpg": "/tropic_social_network/static/media/user-avatar.60b92e78.jpg"
+    "static/media/user-avatar.jpg": "/tropic_social_network/static/media/user-avatar.60b92e78.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.20bba7c4.js",
-    "static/js/2.f73d8c56.chunk.js",
-    "static/css/main.71f3031d.chunk.css",
-    "static/js/main.9b6dcee0.chunk.js"
+    "static/js/runtime-main.3d3a1e58.js",
+    "static/js/2.746a0c23.chunk.js",
+    "static/css/main.fcf7a389.chunk.css",
+    "static/js/main.a6b02b6b.chunk.js"
   ]
 }
